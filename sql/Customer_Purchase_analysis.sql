@@ -27,6 +27,40 @@ ORDER BY total_purchase DESC
 LIMIT 5;
 
 
+--4.Items purchased by each customer
+
+SELECT customer_reference_id,COUNT(item_purchased) as items_customer_purchased
+from Fashion_Retail_Sales
+where item_purchased is not NULL
+group by customer_reference_id
+order by items_customer_purchased desc
+
+--5. Customers who gave low ratings (< 3)
+
+SELECT 
+  customer_reference_id, 
+  review_rating
+FROM 
+  Fashion_Retail_Sales
+WHERE 
+  review_rating < 3;
+
+--2nd method
+SELECT 
+  customer_reference_id, 
+  review_rating
+FROM 
+  Fashion_Retail_Sales
+WHERE 
+  review_rating < 3
+  AND review_rating IS NOT NULL
+GROUP BY 
+  customer_reference_id, 
+  review_rating
+ORDER BY 
+  review_rating ASC;
+
+
 
 
 
